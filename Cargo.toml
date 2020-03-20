@@ -6,6 +6,9 @@ members = [
 ]
 
 [profile.release]
-lto = true
-debug = 1
-incremental = false
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+
+[patch.crates-io]
+servo-freetype-sys = { path = "servo-freetype-proxy" }

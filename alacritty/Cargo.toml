@@ -10,8 +10,8 @@ edition = "2018"
 
 [dependencies]
 alacritty_terminal = { path = "../alacritty_terminal", default-features = false }
-clap = "2"
-log = { version = "0.4", features = ["std"] }
+clap = { version = "2", default-features = false }
+log = "0.4"
 time = "0.1.40"
 fnv = "1"
 serde = { version = "1", features = ["derive"] }

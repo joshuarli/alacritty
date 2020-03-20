@@ -1,3 +1,5 @@
+alacritty-bin*
+
 # Rust build directory
 **/target
 
