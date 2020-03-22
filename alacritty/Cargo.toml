@@ -47,7 +47,8 @@ winapi = { version = "0.3.7", features = ["impl-default", "wincon"]}
 embed-resource = "1.3"
 
 [features]
-default = ["wayland", "x11", "winpty"]
+# TODO: flip to wayland once i move over
+default = ["x11"]
 x11 = ["alacritty_terminal/x11"]
 wayland = ["alacritty_terminal/wayland"]
 winpty = ["alacritty_terminal/winpty"]

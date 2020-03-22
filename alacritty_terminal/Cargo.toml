@@ -42,7 +42,8 @@ mio-anonymous-pipes = "0.1"
 objc = "0.2.2"
 
 [features]
-default = ["x11", "wayland", "winpty"]
+# TODO: flip to wayland once I move over
+default = ["x11"]
 x11 = ["copypasta/x11"]
 wayland = ["copypasta/wayland"]
 nightly = []
