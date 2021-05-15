@@ -25,7 +25,6 @@ use {
 
     x11_dl::xlib::{Display as XDisplay, PropModeReplace, XErrorEvent, Xlib},
     glutin::window::Icon,
-    png::Decoder,
 };
 
 use std::fmt::{self, Display, Formatter};
@@ -278,15 +277,6 @@ impl Window {
 
     #[cfg(not(any(target_os = "macos", windows)))]
     pub fn get_platform_window(title: &str, window_config: &WindowConfig) -> WindowBuilder {
-        #[cfg(feature = "x11")]
-        let icon = {
-            let decoder = Decoder::new(Cursor::new(WINDOW_ICON));
-            let (info, mut reader) = decoder.read_info().expect("invalid embedded icon");
-            let mut buf = vec![0; info.buffer_size()];
-            let _ = reader.next_frame(&mut buf);
-            Icon::from_rgba(buf, info.width, info.height)
-        };
-
         let builder = WindowBuilder::new()
             .with_title(title)
             .with_visible(false)
@@ -294,9 +284,6 @@ impl Window {
             .with_decorations(window_config.decorations != Decorations::None)
             .with_maximized(window_config.maximized())
             .with_fullscreen(window_config.fullscreen());
-
-        #[cfg(feature = "x11")]
-        let builder = builder.with_window_icon(icon.ok());
 
         #[cfg(feature = "wayland")]
         let builder = builder.with_app_id(window_config.class.instance.to_owned());
